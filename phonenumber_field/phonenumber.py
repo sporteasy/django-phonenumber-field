@@ -60,8 +60,9 @@ class PhoneNumber(phonenumbers.phonenumber.PhoneNumber):
 
 
 def to_python(value):
+    phone_number = None
     if value in validators.EMPTY_VALUES:  # None or ''
-        phone_number = None
+        pass
     elif value and isinstance(value, basestring):
         try:
             phone_number = PhoneNumber.from_string(phone_number=value)
@@ -70,7 +71,7 @@ def to_python(value):
             phone_number = PhoneNumber(raw_input=value)
     elif isinstance(value, phonenumbers.phonenumber.PhoneNumber) and \
          not isinstance(value, PhoneNumber):
-        phone_number = Phonenumber(value)
+        phone_number = PhoneNumber(value)
     elif isinstance(value, PhoneNumber):
         phone_number = value
     return phone_number
